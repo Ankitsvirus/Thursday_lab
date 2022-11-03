@@ -1,9 +1,11 @@
 package hql;
 import java.util.List;
-import javax.persistence.Query;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+
 
 public class HqlQuery {
 
@@ -45,26 +47,26 @@ public class HqlQuery {
 		Query query=session.createQuery("delete from Employee where id=2");
 		int status=query.executeUpdate();
 		System.out.println("no of delete is "+status);*/
-		// aggrigation in hql;
-		session.beginTransaction();
-		Query query4=session.createQuery("select sum salary from Employee");
-		List<Double> list4=query4.getResultList();
+		
+		// aggrigate in hql;
+		Query q4=session.createQuery("select sum(salary)from Employee");
+		List<Double> list4=q4.list();
 		System.out.println(list4);
 		
 		
-		Query query1=session.createQuery("select max salary from Employee");
-		List<Double> list1=query1.getResultList();
+		Query q1=session.createQuery("select max(salary)from Employee");
+		List<Double> list1=q1.list();
 		System.out.println(list1);
 		
 		
-		Query query2=session.createQuery("select min salary from Employee");
-		List<Double> list2=query2.getResultList();
+		Query q2=session.createQuery("select min(salary)from Employee");
+		List<Double> list2=q2.list();
 		System.out.println(list2);
 		
 		
 		
-		Query query3=session.createQuery("select avg(salary from Employee");
-		List<Double> list3=query3.getResultList();
+		Query q3=session.createQuery("select avg(salary)from Employee");
+		List<Double> list3=q3.list();
 		System.out.println(list3);
 		session.close();
 		factory.close();
